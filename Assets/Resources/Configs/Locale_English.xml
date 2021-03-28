@@ -1,0 +1,32 @@
+<root>
+	<MainMenu>
+		<PlayButton text="Play!"/>
+		<Credits    text="2019-2021 SMG"/>
+	</MainMenu>
+	<AboutWindow>
+		<Title text="About"/>
+	</AboutWindow>
+	<WinWindow>
+		<Title text="You won!"/>
+	</WinWindow>
+	<LoseWindow>
+		<Title text="You lose!"/>
+	</LoseWindow>
+	<PauseWindow>
+		<Title text="Pause"/>
+	</PauseWindow>
+	<HelpScreen>
+	
+	</HelpScreen>
+	<Common>
+	
+	</Common>
+	<Gameplay>
+		<FinishWindow>
+			<ContinueButton text="Continue"/>
+		</FinishWindow>
+	</Gameplay>
+	<FinalScreen>
+	
+	</FinalScreen>
+</root>
