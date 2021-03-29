@@ -1,7 +1,8 @@
 <root>
 	<MainMenu>
 		<PlayButton text="Play!"/>
-		<Credits    text="2019-2021 SMG"/>
+		<QuitButton text="Quit"/>
+		<Credits    text="2019-2021 SMG for SibGameJam"/>
 	</MainMenu>
 	<AboutWindow>
 		<Title text="About"/>
