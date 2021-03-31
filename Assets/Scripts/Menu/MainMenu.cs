@@ -33,7 +33,7 @@ namespace Game {
 		}
 
 		void ExitGame() {
-			Application.Quit();
+			GlobalController.Instance.Quit();
 		}
 	}
 }

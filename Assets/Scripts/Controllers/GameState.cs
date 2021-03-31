@@ -17,11 +17,22 @@ namespace Game {
 			HandleInput();
 		}
 
+		public void EndGame(bool win) {
+			ScenePersistence.Get<GamePersistence>().IsWin = win;
+			GlobalController.Instance.OpenFinalScene();
+		}
+
 		void HandleInput() {
 			if ( IsDebug ) {
 				if ( Input.GetKeyDown(KeyCode.P) ) {
 					var pauseFlag = TimeController.AddOrRemovePause(this);
 					Debug.LogFormat("Pause cheat used, new pause state is: {0}", pauseFlag);
+				}
+				if ( Input.GetKeyDown(KeyCode.U) ) {
+					EndGame(true);
+				}
+				if ( Input.GetKeyDown(KeyCode.U) ) {
+					EndGame(false);
 				}
 			}
 		}

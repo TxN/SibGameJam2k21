@@ -8,6 +8,12 @@ namespace Game {
 		OverlayUI _overlayUI = null;
 		LoadingController _loadingController = null;
 
+		public bool IsControlsLocked {
+			get {
+				return _overlayUI.TapBlocker.activeInHierarchy;
+			}
+		}
+
 		protected override void Awake() {
 			base.Awake();
 			DontDestroyOnLoad(gameObject);
@@ -21,7 +27,8 @@ namespace Game {
 			}, () => {
 				SetTapBlock(false);
 			});
-			
+
+			ScenePersistence.Instance.SetupHolder(new GamePersistence());
 		}
 
 		private void OnDestroy() {
@@ -32,12 +39,29 @@ namespace Game {
 			_loadingController?.LoadScene(sceneName);
 		}
 
-		public void StartGame() {
+		public void StartGame(bool clearPersistence = true) {
+			if ( clearPersistence ) {
+				ScenePersistence.Instance.SetupHolder(new GamePersistence());
+			}
 			LoadScene("Gameplay");
 		}
 
-		public void Quit() {
+		public void OpenFinalScene() {
+			LoadScene("FinalScene");
+		}
 
+		public void OpenMainMenu() {
+			LoadScene("MainMenu");
+		}
+
+		public void Quit() {
+			SetTapBlock(true);
+			_loadingController.DryRunTransition(true, () => {
+				Application.Quit();
+#if UNITY_EDITOR
+				UnityEditor.EditorApplication.isPlaying = false;
+#endif
+			});
 		}
 
 		public void SetTapBlock(bool enabled) {

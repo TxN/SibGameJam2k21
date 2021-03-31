@@ -54,6 +54,20 @@ namespace SMGCore {
 			});
 		}
 
+
+		/// <summary>
+		/// Просто показываем шторки, без загрузки сцены
+		/// </summary>
+		/// <param name="inOut"></param>
+		/// <param name="onComplete"></param>
+		public void DryRunTransition(bool inOut, Action onComplete) {
+			if ( inOut ) {
+				_currentTransition.ShowTransition(false, onComplete);
+			} else {
+				_currentTransition.HideTransition(false, onComplete);
+			}
+		}
+
 		void OnSceneLoaded(Scene scene, LoadSceneMode loadMode) {
 			if ( scene.name == _curLoadingScene ) {
 				_currentTransition?.HideTransition(false, null);
