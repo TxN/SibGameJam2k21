@@ -158,9 +158,9 @@ namespace SMGCore.Windows {
 
 		void SetupScaler(CanvasScaler scaler) {
 			scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-			scaler.referenceResolution = new Vector2(1920, 1080);
+			scaler.referenceResolution = new Vector2(3320, 1536);
 			scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
-			scaler.matchWidthOrHeight = 0f;
+			scaler.matchWidthOrHeight = 1f;
 			scaler.referencePixelsPerUnit = 100.0f;
 		}
 

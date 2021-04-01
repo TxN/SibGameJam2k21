@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using SMGCore.Windows;
+using KOZA.Windows;
+
 namespace Game {
 	public sealed class MainMenu : MonoBehaviour {
 		[Header("Buttons")]
@@ -29,7 +32,7 @@ namespace Game {
 		}
 
 		void OnAboutButton() {
-
+			WindowManager.Instance.ShowWindow<PauseWindow>(w => w.Show());
 		}
 
 		void ExitGame() {
