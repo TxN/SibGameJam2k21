@@ -146,6 +146,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Android: com.SMG.SibGameJam2k21
     Standalone: com.SMG.SibGameJam2k21
   buildNumber:
     Standalone: 0
@@ -549,6 +550,8 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     1: DOTWEEN
+    7: DOTWEEN
+    13: DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
