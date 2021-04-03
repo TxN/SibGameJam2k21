@@ -44,6 +44,7 @@ namespace Game {
 				return;
 			}
 			_isStamped = true;
+			EventManager.Fire<Document_Stamped_Pre>(new Document_Stamped_Pre(type, _desc));
 			EventManager.Fire<Document_Stamped>(new Document_Stamped(type, _desc));
 		}
 

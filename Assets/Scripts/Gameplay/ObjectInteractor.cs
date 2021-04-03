@@ -12,10 +12,12 @@ namespace Game {
 
 		private void Start() {
 			EventManager.Subscribe<Stamp_Dropped>(this, OnStampDrop);
+			EventManager.Subscribe<Tape_Dropped>(this, OnTapeDrop);
 		}
 
 		private void OnDestroy() {
 			EventManager.Unsubscribe<Stamp_Dropped>(OnStampDrop);
+			EventManager.Unsubscribe<Tape_Dropped>(OnTapeDrop);
 		}
 
 		void Update() {
@@ -41,6 +43,10 @@ namespace Game {
 		}
 
 		void OnStampDrop(Stamp_Dropped e) {
+			_activeItem = null;
+		}
+
+		void OnTapeDrop(Tape_Dropped e) {
 			_activeItem = null;
 		}
 	}

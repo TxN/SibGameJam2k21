@@ -19,17 +19,17 @@ namespace Game {
 		bool _isFailed = false;
 
 		private void Start() {
-			EventManager.Subscribe<Document_Stamped>(this, OnDocumentStamped);
+			EventManager.Subscribe<Document_Stamped_Pre>(this, OnDocumentStamped);
 
 			QueueController.GenerateInitialQueue(StartQueueSize, 0);
 			QueueController.InitSpawn();
 		}
 
 		private void OnDestroy() {
-			EventManager.Unsubscribe<Document_Stamped>(OnDocumentStamped);
+			EventManager.Unsubscribe<Document_Stamped_Pre>(OnDocumentStamped);
 		}
 
-		void OnDocumentStamped(Document_Stamped e) {
+		void OnDocumentStamped(Document_Stamped_Pre e) {
 			if ( IsStampedRight(e.VisitorDesc, e.StampType) ) {
 				_progress++;
 				CheckProgress();
