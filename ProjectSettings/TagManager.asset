@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - IgnoreStamp
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - IgnoreStamp
   - Water
   - UI
   - Loading
