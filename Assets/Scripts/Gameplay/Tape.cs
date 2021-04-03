@@ -23,13 +23,13 @@ namespace Game {
 		}
 
 		protected override void Action(RaycastHit hit) {
-			if ( hit.collider.GetComponent<Breach>() != null ) {
-				hit.collider.GetComponent<Breach>().Seal();
+			if ( hit.collider.GetComponentInParent<Breach>() != null ) {
+				hit.collider.GetComponentInParent<Breach>().Seal();
 			} else if ( hit.collider.GetComponent<Glass>() ) {
 				var fab = Instantiate(GlassDecalFab, hit.collider.transform);
 				fab.gameObject.SetActive(true);
 				fab.transform.position = hit.point;
-				fab.transform.rotation = hit.collider.transform.rotation;
+				fab.transform.rotation = hit.collider.transform.rotation * Quaternion.Euler(0,0, Random.Range(-180, 180));
 			} else {
 				var decal = Instantiate(DecalFab, hit.collider.transform);
 				decal.transform.position = transform.position - hit.normal * 0.3f;

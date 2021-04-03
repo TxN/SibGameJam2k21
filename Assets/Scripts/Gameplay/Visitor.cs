@@ -13,6 +13,23 @@ namespace Game {
 		public override string ToString() {
 			return $"{Name} {Archetype}, Hat: {Traits.Contains(VisitorTrait.Crown) || Traits.Contains(VisitorTrait.Fedora) || Traits.Contains(VisitorTrait.Plunger) }, Mismatch: {Traits.Contains(VisitorTrait.IdentityMismatch)} ";
 		}
+
+		public bool IsEqual(VisitorDescription other) {
+			if ( other.Name != Name ) {
+				return false;
+			}
+
+			if ( other.Archetype != Archetype) {
+				return false;
+			}
+
+			foreach ( var trait in Traits ) {
+				if ( !other.Traits.Contains(trait) ) {
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 
 	public sealed class Visitor : MonoBehaviour {
@@ -38,7 +55,6 @@ namespace Game {
 				attachmentGO.transform.SetParent(transform, false);
 			}			
 		}
-
 	}
 }
 

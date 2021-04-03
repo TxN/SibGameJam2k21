@@ -9,6 +9,10 @@ namespace Game {
 	public sealed class GameState : MonoSingleton<GameState> {
 		public readonly TimeController TimeController = new TimeController();
 
+		public VisitorMechanic VisitorMechanic;
+		public BreachController BreachController;
+		public TimeLimit TimeLimiter;
+
 		public bool IsDebug {
 			get {
 				return true; //Should be set to 'false' for release build.
@@ -23,6 +27,14 @@ namespace Game {
 			EventManager.Subscribe<Game_Ended>(this, OnGameEnded);
 		}
 
+		private void Start() {
+			var p = ScenePersistence.Get<GamePersistence>();
+			var levelIndex = p.LevelIndex;
+			var levelInfo = GameConstants.Levels[levelIndex];
+			VisitorMechanic.Setup(Mathf.CeilToInt( levelInfo.PlannedCount * 1.5f), levelInfo.InitialExclusions, levelInfo.PlannedCount, levelInfo.BannedTraits);
+			TimeLimiter.Setup(levelInfo.LevelTime);
+		}
+
 		void Update() {
 			TimeController.Update(Time.deltaTime);
 			HandleInput();
@@ -33,12 +45,25 @@ namespace Game {
 		}
 
 		public void EndGame(bool win) {
-			ScenePersistence.Get<GamePersistence>().IsWin = win;
+			var pers = ScenePersistence.Get<GamePersistence>();
+			pers.IsWin = win;
+			var nextLevel = pers.LevelIndex + 1;
+
+			var willStartNextLevel = win && GameConstants.Levels.Count > nextLevel;
+			if ( win && willStartNextLevel ) {
+				pers.LevelIndex = nextLevel;
+				Invoke("LoadGameScene", 1f);
+				return;
+			}
 			Invoke("LoadFinishScene", 1f);
 		}
 
 		void LoadFinishScene() {
 			GlobalController.Instance.OpenFinalScene();
+		}
+
+		void LoadGameScene() {
+			GlobalController.Instance.StartGame(false);
 		}
 
 		void HandleInput() {
@@ -48,10 +73,10 @@ namespace Game {
 					Debug.LogFormat("Pause cheat used, new pause state is: {0}", pauseFlag);
 				}
 				if ( Input.GetKeyDown(KeyCode.U) ) {
-					EventManager.Fire<Game_Ended>(new Game_Ended(true));
+					EventManager.Fire<Game_Ended>(new Game_Ended(true, GameResult.Win));
 				}
 				if ( Input.GetKeyDown(KeyCode.I) ) {
-					EventManager.Fire<Game_Ended>(new Game_Ended(false));
+					EventManager.Fire<Game_Ended>(new Game_Ended(false, GameResult.WronglyYeeted));
 				}
 			}
 		}

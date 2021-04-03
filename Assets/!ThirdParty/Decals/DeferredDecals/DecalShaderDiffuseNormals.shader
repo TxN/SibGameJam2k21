@@ -1,4 +1,4 @@
-﻿// Upgrade NOTE: commented out 'float4x4 _CameraToWorld', a built-in variable
+// Upgrade NOTE: commented out 'float4x4 _CameraToWorld', a built-in variable
 // Upgrade NOTE: replaced '_CameraToWorld' with 'unity_CameraToWorld'
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
@@ -83,7 +83,6 @@ Shader "Decal/DecalShader Diffuse+Normals"
 				clip (dot(wnormal, i.orientation) - 0.3);
 
 				fixed4 col = tex2D (_MainTex, i.uv);
-				clip (col.a - 0.2);
 				outDiffuse = col;
 
 				fixed3 nor = UnpackNormal(tex2D(_BumpMap, i.uv));

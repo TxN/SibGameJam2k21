@@ -15,12 +15,18 @@ namespace Game {
 		public Transform ExtendedPosition = null;
 		public Transform RetractedPosition = null;
 
+		public GameObject PassObject = null;
+		public GameObject FailObject = null;
+
 		Dictionary<Archetype, Sprite> _identityPortraits = new Dictionary<Archetype, Sprite>();
 
 		bool _isStamped = false;
 		VisitorDescription _desc;
 
 		private void Start() {
+			PassObject.SetActive(false);
+			FailObject.SetActive(false);
+
 			foreach ( var item in VisitorConstants.ArchetypesToIdentites ) {
 				var res = Resources.Load<Sprite>($"Visitors/Identities/{item.Value}");
 				if ( res ) {
@@ -70,6 +76,8 @@ namespace Game {
 			seq.AppendCallback(() => {
 				var decals = transform.GetComponentsInChildren<Decal>();
 				foreach ( var item in decals ) {
+					PassObject.SetActive(false);
+					FailObject.SetActive(false);
 					Destroy(item.gameObject);
 				}
 			});

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,35 +7,40 @@ using Game.Events;
 
 namespace Game {
 	public sealed class VisitorMechanic : MonoBehaviour {
-		public int TargetCount = 20;
-		public int StartQueueSize = 25;
-		public List<VisitorTrait> NoGoTraits = new List<VisitorTrait>();
-
 		public VisitorQueueController QueueController;
 
-
+		List<VisitorTrait> _noGoTraits = new List<VisitorTrait>();
 		int _progress = 0;
 		bool _isFailed = false;
 
+		public int TargetCount { get; private set; }
+
 		private void Start() {
 			EventManager.Subscribe<Document_Stamped_Pre>(this, OnDocumentStamped);
-
-			QueueController.GenerateInitialQueue(StartQueueSize, 0);
-			QueueController.InitSpawn();
 		}
 
 		private void OnDestroy() {
 			EventManager.Unsubscribe<Document_Stamped_Pre>(OnDocumentStamped);
 		}
 
+		public void Setup(int queueSize, int exclusionsCount, int targetCount, List<VisitorTrait> bannedTraits) {
+			_noGoTraits.Clear();
+			foreach ( var trait in bannedTraits ) {
+				_noGoTraits.Add(trait);
+			}
+			QueueController.GenerateInitialQueue(queueSize, exclusionsCount);
+			QueueController.InitSpawn();
+			TargetCount = targetCount;
+		}
+
 		void OnDocumentStamped(Document_Stamped_Pre e) {
-			if ( IsStampedRight(e.VisitorDesc, e.StampType) ) {
+			if ( IsStampedRight(e.VisitorDesc, e.StampType, out var stampResult) ) {
 				_progress++;
 				CheckProgress();
 			} else {
 				_isFailed = true;
 				QueueController.SpawnEnabled = false;
-				EventManager.Fire(new Game_Ended(false));
+				EventManager.Fire(new Game_Ended(false, stampResult));
 			}
 		}
 
@@ -44,24 +48,48 @@ namespace Game {
 			if ( _progress >= TargetCount ) {
 				_isFailed = false;
 				QueueController.SpawnEnabled = false;
-				EventManager.Fire(new Game_Ended(true));
+				EventManager.Fire(new Game_Ended(true, GameResult.Win));
 			}
 		}
 
-		bool IsStampedRight(VisitorDescription desc, StampType type) {
-			if ( desc.Traits.Contains(VisitorTrait.IdentityMismatch) && type == StampType.Pass ) {
-				return false;
-			}
+		bool IsStampedRight(VisitorDescription desc, StampType type, out GameResult stampResult) {
+			bool hasBannedTraits = HasBannedTraits(desc);
 
-			foreach ( var trait in NoGoTraits ) {
-				if ( desc.Traits.Contains(trait) ) {
-					if ( type == StampType.Pass ) {
+			if ( type == StampType.Pass ) {
+				if ( desc.Traits.Contains(VisitorTrait.IdentityMismatch) ) {
+					stampResult = GameResult.WrongIdentity;
+					return false;
+				}
+				if ( hasBannedTraits ) {
+					if ( !QueueController.IsInExclusionsList(desc) ) {
+						stampResult = GameResult.BannedTraitPassed;
 						return false;
 					}
 				}
+				stampResult = GameResult.Win;
+				return true;
 			}
 
+			if ( QueueController.IsInExclusionsList(desc) ) {
+				stampResult = GameResult.ExclusionNotPassed;
+				return false;
+			}
+
+			if ( !hasBannedTraits ) {
+				stampResult = GameResult.WronglyYeeted;
+				return false;
+			}
+			stampResult = GameResult.Win;
 			return true;
+		}
+
+		bool HasBannedTraits(VisitorDescription desc) {
+			foreach ( var trait in _noGoTraits ) {
+				if ( desc.Traits.Contains(trait) ) {
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 

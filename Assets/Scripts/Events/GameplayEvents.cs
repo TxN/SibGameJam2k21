@@ -51,8 +51,11 @@ namespace Game.Events {
 
 	public struct Game_Ended {
 		public bool Win;
-		public Game_Ended(bool isWin) {
+
+		public GameResult Result;
+		public Game_Ended(bool isWin, GameResult result) {
 			Win = isWin;
+			Result = result;
 		}
 	}
 

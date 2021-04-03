@@ -65,6 +65,14 @@ namespace Game {
 			EventManager.Unsubscribe<VisitorPlace_Freed>(OnVisitorLeft);
 		}
 
+		public bool IsInExclusionsList(VisitorDescription desc) {
+			foreach ( var exclusion in _currentExclusions ) {
+				if ( desc.IsEqual(exclusion) ) {
+					return true;
+				}
+			}
+			return false;
+		}
 
 		public void GenerateInitialQueue(int visitorCount, int exclusionCount) {
 			_visitorQueue.Clear();
@@ -175,8 +183,8 @@ namespace Game {
 		};
 
 		public static Dictionary<Archetype, string> ArchetypesToIdentites = new Dictionary<Archetype, string> {
-			{Archetype.Shark, "SharkPortrait" },
-			{Archetype.Squid, "SquidPortrait" }
+			{Archetype.Shark, "Type5" },
+			{Archetype.Squid, "Type7" }
 		};
 
 		public static List<KeyValuePair<VisitorTrait, string>> HatTraitsToNames = new List<KeyValuePair<VisitorTrait, string>> {
