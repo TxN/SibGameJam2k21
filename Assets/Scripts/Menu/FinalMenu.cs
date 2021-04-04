@@ -18,6 +18,10 @@ namespace Game {
 			QuitButton.onClick.AddListener(Quit);
 			var p = ScenePersistence.Get<GamePersistence>();
 			var isWin = p.IsWin;
+
+			if ( isWin ) {
+				SoundManager.Instance.PlaySound("victory");
+			}
 			Debug.LogWarning($"Game result is: {p.Result}");
 			WinObject.SetActive(isWin);
 			switch ( p.Result ) {

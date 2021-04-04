@@ -27,6 +27,12 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 4d0cb2aae0a4284408fadf8d5444d3bb, type: 3}
   - SoundName: water_stream
     Clip: {fileID: 8300000, guid: 6ee43a5814e94414c9127e692d81d42b, type: 3}
+  - SoundName: victory
+    Clip: {fileID: 8300000, guid: 8fd1b8395e4d99e41b1d7d004478e05c, type: 3}
+  - SoundName: phone_talk
+    Clip: {fileID: 8300000, guid: 995a89cec0655d04ab66c908a015b7c2, type: 3}
+  - SoundName: ringtone
+    Clip: {fileID: 8300000, guid: c9e098e6fa2b82343a3853644668e29d, type: 3}
   Music:
   - SoundName: music_menu
     Clip: {fileID: 8300000, guid: 80af9ceb807f72b409398fb2cc9e2035, type: 3}
