@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37293d6477044204f819487184e902f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExclusionDisplay: {fileID: 0}
+  ExclusionDisplay: {fileID: 2080337034}
   QueueController: {fileID: 507823154}
 --- !u!1 &537564024
 GameObject:

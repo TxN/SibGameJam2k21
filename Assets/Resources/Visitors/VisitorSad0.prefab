@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6563768015721065425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.566, y: 2.139, z: 0.206}
+  m_LocalPosition: {x: 0.551, y: 1.628, z: 0.206}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 600174838033530720}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 7222224120710478028}
   - component: {fileID: 5917160345651937543}
   m_Layer: 0
-  m_Name: VisitorShark0
+  m_Name: VisitorSad0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,10 +173,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Description:
-    Name: VisitorShark0
+    Name: VisitorSad0
     Traits: 01000000
-    Archetype: 0
-  MainSprite: {fileID: 21300000, guid: 2c6c50f1e8424154d83928a0fed925b5, type: 3}
+    Archetype: 4
+  MainSprite: {fileID: 21300000, guid: 90c74da02063d7540b19cca511c6506a, type: 3}
   HatAttachment: {fileID: 7464357394821723886}
 --- !u!1 &7222224121562291544
 GameObject:
@@ -203,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7222224121562291544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.14, y: 0.5, z: 0}
+  m_LocalPosition: {x: -0.011, y: 1.078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7222224120710478029}
@@ -249,7 +249,7 @@ SpriteRenderer:
   m_SortingLayerID: 1659789517
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2c6c50f1e8424154d83928a0fed925b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 90c74da02063d7540b19cca511c6506a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

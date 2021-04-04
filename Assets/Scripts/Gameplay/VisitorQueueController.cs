@@ -217,12 +217,37 @@ namespace Game {
 
 	public static class VisitorConstants {
 		public static List<string> VisitorNames = new List<string> {
-			"VisitorShark0"
+			"VisitorShark0",
+			"VisitorShark1",
+			"VisitorShark2",
+			"VisitorWhale0",
+			"VisitorWhale1",
+			"VisitorWhale2",
+			"VisitorFrog0",
+			"VisitorFrog1",
+			"VisitorFrog2",
+			"VisitorSquid0",
+			"VisitorSquid1",
+			"VisitorSquid2",
+			"VisitorSad0",
+			"VisitorSad1",
+			"VisitorSad2",
+			"VisitorShar0",
+			"VisitorShar1",
+			"VisitorShar2",
+			"VisitorCrab0",
+			"VisitorCrab1",
+			"VisitorCrab2",
 		};
 
 		public static Dictionary<Archetype, string> ArchetypesToIdentites = new Dictionary<Archetype, string> {
-			{Archetype.Shark, "Type5" },
-			{Archetype.Squid, "Type7" }
+			{Archetype.Shark, "Type2" },
+			{Archetype.Squid, "Type7" },
+			{Archetype.Crab, "Type1" },
+			{Archetype.Whale, "Type5" },
+			{Archetype.Sad, "Type4" },
+			{Archetype.Shar, "Type3" },
+			{Archetype.Frog, "Type6" }
 		};
 
 		public static List<KeyValuePair<VisitorTrait, string>> HatTraitsToNames = new List<KeyValuePair<VisitorTrait, string>> {
@@ -253,7 +278,12 @@ namespace Game {
 
 	public enum Archetype {
 		Shark,
-		Squid
+		Squid,
+		Frog,
+		Crab,
+		Sad,
+		Whale,
+		Shar,
 	}
 }
 
