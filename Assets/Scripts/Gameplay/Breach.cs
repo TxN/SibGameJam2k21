@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Game.Events;
 using SMGCore.EventSys;
+using SMGCore;
 
 namespace Game {
 	public enum BreachStatus {
@@ -25,6 +26,7 @@ namespace Game {
 		private void Start() {
 			UpdateState();
 			_lastStateChangeTime = GameState.Instance.TimeController.CurrentTime;
+			SoundManager.Instance.PlaySound("window_crack");
 
 		}
 

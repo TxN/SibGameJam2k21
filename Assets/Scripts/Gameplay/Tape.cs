@@ -5,6 +5,7 @@ using UnityEngine;
 using Game.Events;
 using SMGCore.EventSys;
 using DG.Tweening;
+using SMGCore;
 
 namespace Game {
 	public sealed class Tape : DraggableBody {
@@ -23,6 +24,7 @@ namespace Game {
 		}
 
 		protected override void Action(RaycastHit hit) {
+			SoundManager.Instance.PlaySound("tape_use");
 			if ( hit.collider.GetComponentInParent<Breach>() != null ) {
 				hit.collider.GetComponentInParent<Breach>().Seal();
 			} else if ( hit.collider.GetComponent<Glass>() ) {

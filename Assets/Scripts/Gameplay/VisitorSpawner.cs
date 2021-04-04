@@ -59,6 +59,9 @@ namespace Game {
 			var visitor = _activeVisitor;
 			_activeVisitor = null;
 			yeetSeq.AppendInterval(0.5f);
+			yeetSeq.AppendCallback( () => {
+				SoundManager.Instance.PlaySound("suction");
+			});
 			yeetSeq.Append(visitor.transform.DOMove(YeetPoint.position, 0.75f));
 			yeetSeq.Join(visitor.transform.DOScaleY(1.4f, 0.3f));
 			yeetSeq.Join(visitor.transform.DOScaleX(0.6f, 0.3f));

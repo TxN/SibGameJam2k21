@@ -32,6 +32,7 @@ namespace Game {
 				ScenePersistence.Instance.SetupHolder(new GamePersistence());
 			}
 			EventManager.Subscribe<Game_Ended>(this, OnGameEnded);
+			SoundManager.Instance.PlayMusic("music_ingame");
 		}
 
 		private void Start() {
@@ -54,7 +55,7 @@ namespace Game {
 			EventManager.Unsubscribe<Game_Ended>(OnGameEnded);
 		}
 
-		public void EndGame(bool win) {
+		void EndGame(bool win) {
 			var pers = ScenePersistence.Get<GamePersistence>();
 			pers.IsWin = win;
 			var nextLevel = pers.LevelIndex + 1;
@@ -65,6 +66,7 @@ namespace Game {
 				Invoke("LoadGameScene", 1f);
 				return;
 			}
+			Debug.Log(pers.Result);
 			Invoke("LoadFinishScene", 1f);
 		}
 
@@ -95,6 +97,8 @@ namespace Game {
 			if (_gameEnded ) {
 				return; //already ended
 			}
+			var p = ScenePersistence.Get<GamePersistence>();
+			p.Result = e.Result;
 			_gameEnded = true;
 			EndGame(e.Win);
 		}

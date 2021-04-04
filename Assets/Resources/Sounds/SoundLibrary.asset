@@ -15,4 +15,20 @@ MonoBehaviour:
   Sounds:
   - SoundName: menuClick
     Clip: {fileID: 8300000, guid: 4e821098d73940a4fabd7dbab783a71a, type: 3}
-  Music: []
+  - SoundName: phone_hit
+    Clip: {fileID: 8300000, guid: 3a3797d0cba6a164390274df4fc870a6, type: 3}
+  - SoundName: suction
+    Clip: {fileID: 8300000, guid: 646692a728511e84d8adf7bf78f9b48c, type: 3}
+  - SoundName: window_crack
+    Clip: {fileID: 8300000, guid: 81b366797f53800478e7763f7f331fce, type: 3}
+  - SoundName: tape_use
+    Clip: {fileID: 8300000, guid: 8690153889081704f8b721d78b821e61, type: 3}
+  - SoundName: stamp_use
+    Clip: {fileID: 8300000, guid: 4d0cb2aae0a4284408fadf8d5444d3bb, type: 3}
+  - SoundName: water_stream
+    Clip: {fileID: 8300000, guid: 6ee43a5814e94414c9127e692d81d42b, type: 3}
+  Music:
+  - SoundName: music_menu
+    Clip: {fileID: 8300000, guid: 80af9ceb807f72b409398fb2cc9e2035, type: 3}
+  - SoundName: music_ingame
+    Clip: {fileID: 8300000, guid: 2263e900d7563094fa9bc799704d78b1, type: 3}

@@ -27,8 +27,6 @@ namespace Game {
 			}, () => {
 				SetTapBlock(false);
 			});
-
-			ScenePersistence.Instance.SetupHolder(new GamePersistence());
 		}
 
 		private void OnDestroy() {

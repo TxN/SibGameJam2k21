@@ -44,11 +44,11 @@ namespace Game {
 		public void StartRinging() {
 			_ringSeq = TweenHelper.ReplaceSequence(_ringSeq);
 			_ringSeq.AppendCallback(() => {
-				//TODO: SOUND!
+				SoundManager.Instance.PlaySound("ringtone");
 			});
 			_ringSeq.Append(PhoneBody.DOShakePosition(0.25f, new Vector3(0.05f, 0.05f, 0.05f), 10, 90, false, false));
 			_ringSeq.Join(PhoneBody.DOShakeScale(0.25f, 0.1f));
-			_ringSeq.AppendInterval(0.5f);
+			_ringSeq.AppendInterval(1f);
 			_ringSeq.SetLoops(4);
 
 		}		
@@ -66,7 +66,11 @@ namespace Game {
 			_owner.TakePhone();
 			PhoneHandle.Take();
 			var returnSeq = DOTween.Sequence();
-			returnSeq.AppendInterval(4f);
+			returnSeq.AppendInterval(2f);
+			returnSeq.AppendCallback(() => {
+				SoundManager.Instance.PlaySound("phone_talk");
+			});
+			returnSeq.AppendInterval(2f);
 			returnSeq.AppendCallback(() => {
 				ReturnHandle();
 				EventManager.Fire(new PhoneCall_Finished());

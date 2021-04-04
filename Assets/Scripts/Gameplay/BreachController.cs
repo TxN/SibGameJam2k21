@@ -6,6 +6,7 @@ using Game.Events;
 using SMGCore.EventSys;
 
 using DG.Tweening;
+using SMGCore;
 
 namespace Game {
 	public class BreachController : MonoBehaviour {
@@ -67,7 +68,7 @@ namespace Game {
 		void OnBreachBroken(Breach_Broken e) {
 			var seq = DOTween.Sequence();
 			seq.AppendInterval(5f);
-
+			SoundManager.Instance.PlaySound("water_stream");
 			seq.AppendCallback(() => {
 				EventManager.Fire(new Game_Ended(false, GameResult.BreachBroken));
 			});

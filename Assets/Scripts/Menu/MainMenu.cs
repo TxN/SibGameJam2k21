@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 using SMGCore.Windows;
 using KOZA.Windows;
+using SMGCore;
 
 namespace Game {
 	public sealed class MainMenu : MonoBehaviour {
@@ -21,6 +22,7 @@ namespace Game {
 			if ( Application.platform == RuntimePlatform.WebGLPlayer ) {
 				QuitButton.gameObject.SetActive(false);
 			}
+			SoundManager.Instance.PlayMusic("music_menu");
 		}
 
 		void OnPlayButton() {

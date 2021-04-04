@@ -7,6 +7,7 @@ using Game.Events;
 using SMGCore.EventSys;
 
 using DG.Tweening;
+using SMGCore;
 
 namespace Game {
 	public enum StampType {
@@ -48,6 +49,9 @@ namespace Game {
 			decal.SetActive(true);
 			var stampSeq = DOTween.Sequence();
 			stampSeq.Append(StampObj.transform.DOLocalMoveY(_stampStartPos.y - 0.3f, 0.2f));
+			stampSeq.InsertCallback(0.1f, () => {
+				SoundManager.Instance.PlaySound("stamp_use");
+			});
 			stampSeq.Append(StampObj.transform.DOLocalMoveY(_stampStartPos.y + 0.1f, 0.15f));
 			stampSeq.Append(StampObj.transform.DOLocalMoveY(_stampStartPos.y, 0.15f));
 
