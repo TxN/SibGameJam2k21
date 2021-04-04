@@ -58,6 +58,7 @@ namespace Game {
 		public void SetupAttachement(VisitorTrait trait, GameObject attachmentGO) {
 			if ( trait.IsHatTrait() ) {
 				attachmentGO.transform.SetParent(HatAttachment, false);
+				attachmentGO.transform.localPosition = Vector3.zero;
 			} else {
 				attachmentGO.transform.SetParent(transform, false);
 			}			

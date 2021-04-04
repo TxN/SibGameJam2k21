@@ -14,6 +14,7 @@ namespace Game {
 		public TimeLimit TimeLimiter;
 		public LimitsDisplay LimitsDisplay;
 		public ExclusionAdder ExclusionAdder;
+		public ShiftIndicator ShiftIndicator;
 
 		bool _gameEnded = false;
 
@@ -40,7 +41,8 @@ namespace Game {
 			VisitorMechanic.Setup(Mathf.CeilToInt( levelInfo.PlannedCount * 1.2f), levelInfo.InitialExclusions, levelInfo.PlannedCount, levelInfo.BannedTraits);
 			TimeLimiter.Setup(levelInfo.LevelTime);
 			LimitsDisplay.Setup(levelInfo.BannedTraits);
-			ExclusionAdder.Setup(levelInfo.ExclusionsEnabled);
+			ExclusionAdder.Setup(levelInfo.ExclusionsEnabled, levelInfo.MaxCalls);
+			ShiftIndicator.Setup(TimeLimiter, VisitorMechanic);
 		}
 
 		void Update() {

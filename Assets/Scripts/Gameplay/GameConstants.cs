@@ -9,28 +9,32 @@ namespace Game {
 		public int PlannedCount = 10;
 		public List<VisitorTrait> BannedTraits = new List<VisitorTrait>();
 		public bool ExclusionsEnabled = false;
+		public int MaxCalls = 0;
 	}
 	public static class GameConstants  {
 		public static List<LevelDescription> Levels = new List<LevelDescription> {
 			new LevelDescription {
 				LevelTime = 150f,
-				InitialExclusions = 0,
+				InitialExclusions = 1,
 				PlannedCount = 10,
-				ExclusionsEnabled = false,
-				BannedTraits = new List<VisitorTrait> { VisitorTrait.Human}
+				ExclusionsEnabled = true,
+				MaxCalls = 1,
+				BannedTraits = new List<VisitorTrait> { VisitorTrait.Human, VisitorTrait.Mechanical }
 			},
 			new LevelDescription {
 				LevelTime = 150f,
 				InitialExclusions = 0,
 				PlannedCount = 15,
 				ExclusionsEnabled = true,
-				BannedTraits = new List<VisitorTrait> { VisitorTrait.Human, VisitorTrait.Mechanical}
+				MaxCalls = 2,
+				BannedTraits = new List<VisitorTrait> { VisitorTrait.Human, VisitorTrait.Mechanical, VisitorTrait.Fedora, VisitorTrait.Crown, VisitorTrait.Plunger}
 			},
 			new LevelDescription {
 				LevelTime = 150f,
 				InitialExclusions = 1,
 				PlannedCount = 20,
 				ExclusionsEnabled = true,
+				MaxCalls = 3,
 				BannedTraits = new List<VisitorTrait> { VisitorTrait.Human, VisitorTrait.Mechanical, VisitorTrait.Demonic, VisitorTrait.Plunger, VisitorTrait.Crown, VisitorTrait.Fedora}
 			}
 		};

@@ -47,7 +47,7 @@ namespace Game {
 			GenerateNewVisitor();
 		}
 
-		protected  void Awake() {
+		 void Awake() {
 			
 			foreach ( var visitorName in VisitorConstants.VisitorNames ) {
 				var fab = Resources.Load<Visitor>($"Visitors/{visitorName}");
@@ -108,6 +108,8 @@ namespace Game {
 			var description = PickExclusionFromList(_visitorQueue.ToList(), _currentExclusions);
 			if ( description != null ) {
 				_currentExclusions.Add(description);
+			} else {
+				Debug.LogError("Cannot add exclusion visitor");
 			}
 			return description;
 		}

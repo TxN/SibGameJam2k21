@@ -11,6 +11,10 @@ namespace Game {
 		float _timeSpan = 0f;
 		float _timePassed = 0f;
 		bool _enabled = false;
+
+		public float LevelTime => _timeSpan;
+		public float TimeLeft => Mathf.Clamp( _timeSpan - _timePassed, 0, float.MaxValue);
+
 		public void Setup(float timeLimit) {
 			_enabled = true;
 			_timeSpan = timeLimit;

@@ -13,7 +13,7 @@ namespace Game {
 		[Range(0,100)]
 		public int TriggerChance = 40;
 
-		public float RingTimeout = 4f;
+		public float RingTimeout = 5f;
 
 		public VisitorMechanic VisitorMechanic;
 		public PhoneController Phone;
@@ -23,11 +23,14 @@ namespace Game {
 		bool _enabled = false;
 
 		float _lastRingTime = 0f;
+		int _maxCalls = 0;
+		int _callCount = 0;
 
 		public bool IsRinging => _isRinging;
 
-		public void Setup(bool enable) {
+		public void Setup(bool enable, int maxCalls) {
 			_enabled = enable;
+			_maxCalls = maxCalls;
 			EventManager.Subscribe<Game_Ended>(this, OnGameEnd);
 			Phone.Setup(this);
 		}
@@ -36,11 +39,11 @@ namespace Game {
 			if ( Input.GetKeyDown(KeyCode.M) ) {
 				TriggerCall();
 			}
-			if ( _enabled ) {
+			if ( !_enabled ) {
 				return;
 			}
 			var ct = GameState.Instance.TimeController.CurrentTime;
-			if ( ct - _lastRingTime > TriggerTime ) {
+			if ( ct - _lastRingTime > TriggerTime && _callCount < _maxCalls ) {
 				_lastRingTime = ct;
 				if ( Random.Range(0, 100) < TriggerChance && !_isRinging && VisitorMechanic.CanAddExclusion() ) {
 					TriggerCall();
@@ -49,6 +52,7 @@ namespace Game {
 		}
 
 		void TriggerCall() {
+			_callCount++;
 			Phone.StartRinging();
 			_isRinging = true;
 			_ringSeq = DOTween.Sequence();

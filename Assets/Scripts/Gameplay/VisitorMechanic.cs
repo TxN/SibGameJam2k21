@@ -15,6 +15,7 @@ namespace Game {
 		bool _isFailed = false;
 
 		public int TargetCount { get; private set; }
+		public int Progress => _progress;
 
 		private void Start() {
 			EventManager.Subscribe<Document_Stamped_Pre>(this, OnDocumentStamped);
@@ -86,6 +87,11 @@ namespace Game {
 						return false;
 					}
 				}
+				stampResult = GameResult.Win;
+				return true;
+			}
+
+			if ( desc.Traits.Contains(VisitorTrait.IdentityMismatch) ) {
 				stampResult = GameResult.Win;
 				return true;
 			}

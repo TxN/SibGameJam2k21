@@ -18,6 +18,7 @@ namespace Game {
 				}				
 			}
 			visitorFab.transform.SetParent(parent, false);
+			visitorFab.transform.localPosition = Vector3.zero;
 			var initScale = parent.localScale;
 			parent.localScale = Vector3.zero;
 			parent.DOScale(initScale, 0.5f);
