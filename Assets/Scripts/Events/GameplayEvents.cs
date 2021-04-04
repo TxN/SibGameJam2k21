@@ -74,4 +74,12 @@ namespace Game.Events {
 	public struct Tape_Dropped {
 
 	}
+
+	public struct Phone_Taken {
+
+	}
+
+	public struct PhoneCall_Finished {
+
+	}
 }

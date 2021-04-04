@@ -48,6 +48,13 @@ namespace Game {
 			}
 		}
 
+		public void SetupForDisplay() {
+			var cols = GetComponentsInChildren<Collider>();
+			foreach ( var item in cols ) {
+				Destroy(item);
+			}
+		}
+
 		public void SetupAttachement(VisitorTrait trait, GameObject attachmentGO) {
 			if ( trait.IsHatTrait() ) {
 				attachmentGO.transform.SetParent(HatAttachment, false);

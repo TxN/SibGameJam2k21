@@ -7,6 +7,7 @@ using Game.Events;
 
 namespace Game {
 	public sealed class VisitorMechanic : MonoBehaviour {
+		public ExclusionDisplay ExclusionDisplay = null;
 		public VisitorQueueController QueueController;
 
 		List<VisitorTrait> _noGoTraits = new List<VisitorTrait>();
@@ -28,9 +29,28 @@ namespace Game {
 			foreach ( var trait in bannedTraits ) {
 				_noGoTraits.Add(trait);
 			}
+			QueueController.Setup(this);
 			QueueController.GenerateInitialQueue(queueSize, exclusionsCount);
 			QueueController.InitSpawn();
 			TargetCount = targetCount;
+			foreach ( var ex in QueueController.Exclusions ) {
+				ExclusionDisplay.SetupExclusion(QueueController.InstantiateVisitor(ex));
+			}
+		}
+
+		public bool CanAddExclusion() {
+			return ExclusionDisplay.HasFreePlaces();
+		}
+
+		public void TryAddExclusion() {
+			if ( !ExclusionDisplay.HasFreePlaces() ) {
+				return;
+			}
+			var desc = QueueController.AddNewExclusion();
+			if ( desc != null ) {
+				ExclusionDisplay.SetupExclusion(QueueController.InstantiateVisitor(desc));
+			}
+			
 		}
 
 		void OnDocumentStamped(Document_Stamped_Pre e) {
@@ -83,7 +103,7 @@ namespace Game {
 			return true;
 		}
 
-		bool HasBannedTraits(VisitorDescription desc) {
+		public bool HasBannedTraits(VisitorDescription desc) {
 			foreach ( var trait in _noGoTraits ) {
 				if ( desc.Traits.Contains(trait) ) {
 					return true;

@@ -82,6 +82,10 @@ namespace Game {
 				Drop();
 			}
 		}
+
+		public bool CanInteract() {
+			return true;
+		}
 	}
 
 }

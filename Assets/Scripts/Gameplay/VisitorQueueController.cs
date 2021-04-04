@@ -7,9 +7,10 @@ using Game.Events;
 using SMGCore.EventSys;
 
 using SMGCore;
+using System.Linq;
 
 namespace Game {
-	public sealed class VisitorQueueController : ManualSingleton<VisitorQueueController> {
+	public sealed class VisitorQueueController : MonoBehaviour {
 		public int StartQueueSize = 20;
 
 		[Range(0,100)]
@@ -29,7 +30,15 @@ namespace Game {
 
 		VisitorDescription _currentVisitor = null;
 
+		VisitorMechanic _owner = null;
+
 		public bool SpawnEnabled { get; set; } = true;
+
+		public List<VisitorDescription> Exclusions => _currentExclusions;
+
+		public void Setup(VisitorMechanic owner) {
+			_owner = owner;
+		}
 
 		public void InitSpawn() {
 			if ( _currentVisitor != null ) {
@@ -38,8 +47,8 @@ namespace Game {
 			GenerateNewVisitor();
 		}
 
-		protected override void Awake() {
-			base.Awake();
+		protected  void Awake() {
+			
 			foreach ( var visitorName in VisitorConstants.VisitorNames ) {
 				var fab = Resources.Load<Visitor>($"Visitors/{visitorName}");
 				if ( !fab ) {
@@ -88,12 +97,41 @@ namespace Game {
 			}
 			sb.Append("excllusions queue:\n");
 			for ( int i = 0; i < exclusionCount; i++ ) {
-				var description = CreateRandomVisitor();
-				_currentExclusions.Add(description);
-				sb.Append(description.ToString());
-				sb.Append("\n");
+				var description = AddNewExclusion();
+				sb.Append(description?.ToString());
+				sb.Append("\n");		
 			}
 			Debug.Log(sb.ToString());
+		}
+
+		public VisitorDescription AddNewExclusion() {
+			var description = PickExclusionFromList(_visitorQueue.ToList(), _currentExclusions);
+			if ( description != null ) {
+				_currentExclusions.Add(description);
+			}
+			return description;
+		}
+
+		VisitorDescription PickExclusionFromList(List<VisitorDescription> visitors, List<VisitorDescription> exclusions) {
+			var suitableVisitors = new List<VisitorDescription>();
+			foreach ( var visitor in visitors ) {
+				if ( _owner.HasBannedTraits(visitor) && !visitor.Traits.Contains(VisitorTrait.IdentityMismatch) ) {
+					var canAdd = true;
+					foreach ( var ex in exclusions ) {
+						if ( ex.IsEqual(visitor) ) {
+							canAdd = false; //already in exclusion list
+						}
+					}
+					if ( canAdd ) {
+						suitableVisitors.Add(visitor);
+					}					
+				}
+			}
+			if ( suitableVisitors.Count <= 0) {
+				return null;
+			}
+			return suitableVisitors[Random.Range(0, suitableVisitors.Count)];
+
 		}
 
 		VisitorDescription CreateRandomVisitor(VisitorTrait excludeTrait = VisitorTrait.None) {

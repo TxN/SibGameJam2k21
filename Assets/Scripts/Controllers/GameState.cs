@@ -12,6 +12,12 @@ namespace Game {
 		public VisitorMechanic VisitorMechanic;
 		public BreachController BreachController;
 		public TimeLimit TimeLimiter;
+		public LimitsDisplay LimitsDisplay;
+		public ExclusionAdder ExclusionAdder;
+
+		bool _gameEnded = false;
+
+		public bool IsEnded => _gameEnded;
 
 		public bool IsDebug {
 			get {
@@ -31,8 +37,10 @@ namespace Game {
 			var p = ScenePersistence.Get<GamePersistence>();
 			var levelIndex = p.LevelIndex;
 			var levelInfo = GameConstants.Levels[levelIndex];
-			VisitorMechanic.Setup(Mathf.CeilToInt( levelInfo.PlannedCount * 1.5f), levelInfo.InitialExclusions, levelInfo.PlannedCount, levelInfo.BannedTraits);
+			VisitorMechanic.Setup(Mathf.CeilToInt( levelInfo.PlannedCount * 1.2f), levelInfo.InitialExclusions, levelInfo.PlannedCount, levelInfo.BannedTraits);
 			TimeLimiter.Setup(levelInfo.LevelTime);
+			LimitsDisplay.Setup(levelInfo.BannedTraits);
+			ExclusionAdder.Setup(levelInfo.ExclusionsEnabled);
 		}
 
 		void Update() {
@@ -82,6 +90,10 @@ namespace Game {
 		}
 
 		void OnGameEnded(Game_Ended e) {
+			if (_gameEnded ) {
+				return; //already ended
+			}
+			_gameEnded = true;
 			EndGame(e.Win);
 		}
 	}

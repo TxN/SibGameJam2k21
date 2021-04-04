@@ -40,12 +40,16 @@ namespace Game {
 
 		protected override bool IsOnDropZone(Collider hitCol) {
 			var flag = hitCol.GetComponent<TapeStand>() != null;
-			Debug.Log(hitCol.gameObject.name);
 			return flag;
 		}
 
 		void OnBreachSealed(Breach_Sealed e) {
-
+			_active = false;
+			var returnSeq = DOTween.Sequence();
+			returnSeq.AppendInterval(0.35f);
+			returnSeq.Append(transform.DOMove(RestZone.position, 0.5f));
+			returnSeq.Join(transform.DORotate(RestZone.rotation.eulerAngles, 0.4f));
+			returnSeq.AppendCallback(Drop);
 		}
 
 		public override void Take() {

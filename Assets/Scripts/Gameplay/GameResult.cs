@@ -6,7 +6,8 @@ namespace Game {
 		BannedTraitPassed,
 		WronglyYeeted,
 		BreachBroken,
-		TimeIsOff
+		TimeIsOff,
+		MissedCall,
 	}
 }
 

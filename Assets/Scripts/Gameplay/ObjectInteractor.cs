@@ -13,11 +13,13 @@ namespace Game {
 		private void Start() {
 			EventManager.Subscribe<Stamp_Dropped>(this, OnStampDrop);
 			EventManager.Subscribe<Tape_Dropped>(this, OnTapeDrop);
+			EventManager.Subscribe<PhoneCall_Finished>(this, OnPhoneCallFinished);
 		}
 
 		private void OnDestroy() {
 			EventManager.Unsubscribe<Stamp_Dropped>(OnStampDrop);
 			EventManager.Unsubscribe<Tape_Dropped>(OnTapeDrop);
+			EventManager.Unsubscribe<PhoneCall_Finished>(OnPhoneCallFinished);
 		}
 
 		void Update() {
@@ -35,7 +37,8 @@ namespace Game {
 				if ( interactable == null ) {
 					return;
 				}
-				if ( Input.GetMouseButtonDown(0) ) {
+				//Debug.Log(interactable);
+				if ( interactable.CanInteract() && Input.GetMouseButtonDown(0) ) {
 					interactable.Interact();
 					_activeItem = interactable;
 				}
@@ -47,6 +50,10 @@ namespace Game {
 		}
 
 		void OnTapeDrop(Tape_Dropped e) {
+			_activeItem = null;
+		}
+
+		void OnPhoneCallFinished(PhoneCall_Finished e) {
 			_activeItem = null;
 		}
 	}
