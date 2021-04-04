@@ -90,6 +90,10 @@ namespace Game {
 				if ( Input.GetKeyDown(KeyCode.I) ) {
 					EventManager.Fire<Game_Ended>(new Game_Ended(false, GameResult.WronglyYeeted));
 				}
+				if ( Input.GetKeyDown(KeyCode.Escape)) {
+					GlobalController.Instance.OpenMainMenu();
+				}
+
 			}
 		}
 
