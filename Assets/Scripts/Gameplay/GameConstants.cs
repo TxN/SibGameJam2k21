@@ -14,7 +14,7 @@ namespace Game {
 	public static class GameConstants  {
 		public static List<LevelDescription> Levels = new List<LevelDescription> {
 			new LevelDescription {
-				LevelTime = 240f,
+				LevelTime = 200,
 				InitialExclusions = 1,
 				PlannedCount = 12,
 				ExclusionsEnabled = true,
@@ -22,7 +22,7 @@ namespace Game {
 				BannedTraits = new List<VisitorTrait> { VisitorTrait.Human, VisitorTrait.Mechanical }
 			},
 			new LevelDescription {
-				LevelTime = 180f,
+				LevelTime = 160f,
 				InitialExclusions = 0,
 				PlannedCount = 15,
 				ExclusionsEnabled = true,
@@ -30,11 +30,11 @@ namespace Game {
 				BannedTraits = new List<VisitorTrait> { VisitorTrait.Human, VisitorTrait.Mechanical, VisitorTrait.Fedora, VisitorTrait.Crown, VisitorTrait.Plunger}
 			},
 			new LevelDescription {
-				LevelTime = 150f,
+				LevelTime = 140f,
 				InitialExclusions = 1,
 				PlannedCount = 17,
 				ExclusionsEnabled = true,
-				MaxCalls = 3,
+				MaxCalls = 2,
 				BannedTraits = new List<VisitorTrait> { VisitorTrait.Human, VisitorTrait.Mechanical, VisitorTrait.Demonic, VisitorTrait.Plunger, VisitorTrait.Crown, VisitorTrait.Fedora}
 			}
 		};

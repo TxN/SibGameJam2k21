@@ -65,12 +65,9 @@ namespace Game {
 			_isHandleLoose = true;
 			_owner.TakePhone();
 			PhoneHandle.Take();
+			SoundManager.Instance.PlaySound("phone_talk");
 			var returnSeq = DOTween.Sequence();
-			returnSeq.AppendInterval(2f);
-			returnSeq.AppendCallback(() => {
-				SoundManager.Instance.PlaySound("phone_talk");
-			});
-			returnSeq.AppendInterval(2f);
+			returnSeq.AppendInterval(4f);
 			returnSeq.AppendCallback(() => {
 				ReturnHandle();
 				EventManager.Fire(new PhoneCall_Finished());
