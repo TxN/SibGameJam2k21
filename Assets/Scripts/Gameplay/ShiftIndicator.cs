@@ -23,7 +23,7 @@ namespace Game {
 			var timeLeft = _timeLimiter.TimeLeft;
 			var minutesLeft = Mathf.FloorToInt(timeLeft / 60);
 			var secondsLeft = Mathf.FloorToInt(timeLeft - minutesLeft * 60);
-			TimeText.text = $"{minutesLeft}:{secondsLeft}";
+			TimeText.text = $"{minutesLeft.ToString("00")}:{secondsLeft.ToString("00")}";
 		}
 	}
 }
