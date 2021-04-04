@@ -1,4 +1,5 @@
 using DG.Tweening;
+using SMGCore;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,6 +60,7 @@ namespace Game {
 		}
 
 		public virtual void Take() {
+			SoundManager.Instance.PlaySound("item_take");
 			_active = true;
 			OwnCollider.enabled = false;
 			_cooldown = ActionCoooldown;

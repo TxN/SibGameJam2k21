@@ -54,7 +54,7 @@ namespace Game {
 		}
 
 		public void Quit() {
-			GlobalController.Instance.Quit();
+			GlobalController.Instance.OpenMainMenu();
 		}
 
 		public void Restart() {

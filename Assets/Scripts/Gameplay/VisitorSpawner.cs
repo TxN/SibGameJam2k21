@@ -14,6 +14,8 @@ namespace Game {
 		public Transform YeetPoint;
 		public Transform PassPoint;
 
+		public Transform ScoopTransform;
+		public SlideShowAnim ScoopAnim;
 
 		Visitor _activeVisitor  = null;
 		bool    _enterCompleted = false;
@@ -54,15 +56,20 @@ namespace Game {
 			if ( !_activeVisitor ) {
 				return;
 			}
+			
 			var yeetSeq = DOTween.Sequence();
 			//TODO: play effects and sound
 			var visitor = _activeVisitor;
 			_activeVisitor = null;
 			yeetSeq.AppendInterval(0.5f);
 			yeetSeq.AppendCallback( () => {
+				ScoopAnim.gameObject.SetActive(true);
 				SoundManager.Instance.PlaySound("suction");
 			});
 			yeetSeq.Append(visitor.transform.DOMove(YeetPoint.position, 0.75f));
+			yeetSeq.InsertCallback(0.8f,() => {
+				ScoopAnim.gameObject.SetActive(false);
+			});
 			yeetSeq.Join(visitor.transform.DOScaleY(1.4f, 0.3f));
 			yeetSeq.Join(visitor.transform.DOScaleX(0.6f, 0.3f));
 			yeetSeq.AppendCallback(() => {

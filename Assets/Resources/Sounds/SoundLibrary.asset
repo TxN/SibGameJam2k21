@@ -33,6 +33,8 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 995a89cec0655d04ab66c908a015b7c2, type: 3}
   - SoundName: ringtone
     Clip: {fileID: 8300000, guid: c9e098e6fa2b82343a3853644668e29d, type: 3}
+  - SoundName: item_take
+    Clip: {fileID: 8300000, guid: 8c472181fe3690747937780c27b8999d, type: 3}
   Music:
   - SoundName: music_menu
     Clip: {fileID: 8300000, guid: 80af9ceb807f72b409398fb2cc9e2035, type: 3}

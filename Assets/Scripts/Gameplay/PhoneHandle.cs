@@ -16,6 +16,7 @@ namespace Game {
 			if ( col ) {
 				col.enabled = false;
 			}
+			SoundManager.Instance.PlaySound("item_take");
 		}
 
 		public void Return(Transform returnPos) {

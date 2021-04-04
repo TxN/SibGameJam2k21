@@ -43,10 +43,12 @@ namespace Game {
 			}
 			if ( _curStatus == BreachStatus.Large ) {
 				_curStatus = BreachStatus.Broken;
+				SoundManager.Instance.PlaySound("window_crack");
 				EventManager.Fire<Breach_Broken>(new Breach_Broken());
 			}
 			if ( _curStatus == BreachStatus.Small ) {
 				_curStatus = BreachStatus.Large;
+				SoundManager.Instance.PlaySound("window_crack");
 			}
 			UpdateState();
 			_lastStateChangeTime = GameState.Instance.TimeController.CurrentTime;
